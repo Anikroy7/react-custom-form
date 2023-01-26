@@ -71,19 +71,8 @@ label:nth-of-type(2) {
   margin-top: 12px;
 }
 
-input::placeholder {
-  color: gray;
-}
 
-input {
-  background: #ecf0f3;
-  padding: 10px;
-  padding-left: 20px;
-  height: 50px;
-  font-size: 14px;
-  border-radius: 50px;
-  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
-}
+
 
 .submitBtn {
   color: white;
@@ -99,6 +88,62 @@ input {
 
 button:hover {
   box-shadow: none;
+}
+
+.inputError {
+  margin: auto;
+  font-size: 20px;
+  font-weight: 300;
+  animation: lights 2s linear infinite;
+
+}
+
+@keyframes lights {
+  0% {
+    color: hsl(342, 67%, 32%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+
+  30% {
+    color: hsl(0, 86%, 34%);
+    text-shadow:
+      0 0 1em hsla(0, 100%, 50%, 0.5),
+      0 0 0.125em hsla(0, 100%, 60%, 0.5),
+      -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+
+  40% {
+    color: hsl(0, 78%, 61%);
+    text-shadow:
+      0 0 1em hsla(345, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 90%, 0.5),
+      -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+      0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+  }
+
+  70% {
+    color: hsl(340, 92%, 51%);
+    text-shadow:
+      0 0 1em hsla(357, 89%, 21%, 0.5),
+      0 0 0.125em hsla(320, 100%, 60%, 0.5),
+      0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+
+  100% {
+    color: hsl(12, 93%, 47%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+
 }
 
 a {
@@ -117,4 +162,5 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
+  background-color: #991410;
 }

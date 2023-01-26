@@ -1,10 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
+import TextInput from './TextInput';
 
-const InputGroup = ({ label, type, name, value, placeholder }) => {
+
+
+const InputGroup = ({ label, type, name, value, placeholder, onChange, errors }) => {
+    console.log(errors);
     return (
         <div className="inputs" >
             <label htmlFor="">{label}</label>
-            <input type={type} name={name} placeholder={placeholder} />
+            <TextInput
+                name={name}
+                id={name}
+                placeholder={placeholder ?? ''}
+                value={value}
+                onChange={onChange}
+                errors={errors}
+            />
+            {errors && <p className='inputError'>{errors}</p>}
         </div >
     );
 };

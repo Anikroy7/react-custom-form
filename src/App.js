@@ -1,19 +1,61 @@
 
+import { useState } from 'react';
 import './App.css';
 import InputGroup from './Components/InputGroup';
 
-const formIntitalState = {
+const init = {
   title: '',
   bio: '',
   skills: ''
 }
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log('object');
-}
+
+
 
 function App() {
+  const [inputValues, setInputValues] = useState({ ...init });
+  const [errors, setErrors] = useState({ ...init });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { isValid, errors } = cheakValidation(inputValues);
+    console.log(isValid, errors);
+    if (isValid) {
+      setErrors({ ...errors });
+    } else {
+      setErrors({ ...errors });
+    }
+  }
+
+  const handleOnchange = (e) => {
+    setInputValues((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
+  console.log(errors);
+  const cheakValidation = (values) => {
+    const { title, bio, skills } = values;
+    const errors = {}
+
+    if (!title) {
+      errors.title = 'Invalid title'
+    }
+    if (!bio) {
+      errors.bio = 'Invalid bio'
+    }
+    if (!skills) {
+      errors.skills = 'Invalid Skills'
+    }
+
+    return {
+      isValid: Object.keys(errors).length === 0,
+      errors
+    }
+  }
+
+
+
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
@@ -24,21 +66,27 @@ function App() {
             name={'title'}
             type={'text'}
             placeholder={'Anik roy'}
-            value={formIntitalState.title}
+            value={inputValues.title}
+            onChange={handleOnchange}
+            errors={errors.title}
           />
           <InputGroup
             label={'Bio?'}
             name={'bio'}
             type={'text'}
             placeholder={'I am a software engineer'}
-            value={formIntitalState.bio}
+            value={inputValues.bio}
+            onChange={handleOnchange}
+            errors={errors.bio}
           />
           <InputGroup
             label={'Skills?'}
             name={'skills'}
             type={'text'}
-            placeholder={'React, Node js'}
-            value={formIntitalState.bio}
+            placeholder={'React, Node js, etc.'}
+            value={inputValues.skills}
+            onChange={handleOnchange}
+            errors={errors.skills}
           />
 
           <input className='submitBtn' type="submit" value='Submit' />
