@@ -1,24 +1,50 @@
-import logo from './logo.svg';
+
 import './App.css';
+import InputGroup from './Components/InputGroup';
+
+const formIntitalState = {
+  title: '',
+  bio: '',
+  skills: ''
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log('object');
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <form onSubmit={handleSubmit}>
+        <div className='container'>
+          <div className="brand-title">User Form</div>
+          <InputGroup
+            label={'What is your title?'}
+            name={'title'}
+            type={'text'}
+            placeholder={'Anik roy'}
+            value={formIntitalState.title}
+          />
+          <InputGroup
+            label={'Bio?'}
+            name={'bio'}
+            type={'text'}
+            placeholder={'I am a software engineer'}
+            value={formIntitalState.bio}
+          />
+          <InputGroup
+            label={'Skills?'}
+            name={'skills'}
+            type={'text'}
+            placeholder={'React, Node js'}
+            value={formIntitalState.bio}
+          />
+
+          <input className='submitBtn' type="submit" value='Submit' />
+        </div>
+      </form >
+    </div >
   );
 }
 
