@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import './App.css';
 import InputGroup from './Components/InputGroup';
@@ -9,43 +8,73 @@ const init = {
   skills: ''
 }
 
-
-
-
 function App() {
   const [inputValues, setInputValues] = useState({ ...init });
   const [errors, setErrors] = useState({ ...init });
+  const [focus, setFocus] = useState({
+    title: false,
+    bio: false,
+    skills: false
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { isValid, errors } = cheakValidation(inputValues);
-    console.log(isValid, errors);
+
     if (isValid) {
       setErrors({ ...errors });
+      setInputValues({
+        ...inputValues,
+      })
+
     } else {
       setErrors({ ...errors });
     }
+    console.log(inputValues);
   }
-
   const handleOnchange = (e) => {
     setInputValues((prev) => ({
       ...prev,
       [e.target.name]: e.target.value
     }))
   }
-  console.log(errors);
+
+  const handleBlur = (e) => {
+    const { errors } = cheakValidation(inputValues);
+    const key = e.target.name;
+    if (errors[key] && focus[key]) {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: errors[key]
+
+      }))
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: ""
+      }))
+    }
+  }
+  const handleOnFocus = (e) => {
+    setFocus((prev) => ({
+      ...prev,
+      [e.target.name]: true
+    }))
+
+  }
+
   const cheakValidation = (values) => {
     const { title, bio, skills } = values;
     const errors = {}
 
     if (!title) {
-      errors.title = 'Invalid title'
+      errors.title = 'Name Field is required'
     }
     if (!bio) {
-      errors.bio = 'Invalid bio'
+      errors.bio = 'Bio field is required'
     }
     if (!skills) {
-      errors.skills = 'Invalid Skills'
+      errors.skills = 'Skills field is required'
     }
 
     return {
@@ -67,8 +96,10 @@ function App() {
             type={'text'}
             placeholder={'Anik roy'}
             value={inputValues.title}
-            onChange={handleOnchange}
             errors={errors.title}
+            onChange={handleOnchange}
+            onFoucus={handleOnFocus}
+            onBlur={handleBlur}
           />
           <InputGroup
             label={'Bio?'}
@@ -76,8 +107,10 @@ function App() {
             type={'text'}
             placeholder={'I am a software engineer'}
             value={inputValues.bio}
-            onChange={handleOnchange}
             errors={errors.bio}
+            onChange={handleOnchange}
+            onFoucus={handleOnFocus}
+            onBlur={handleBlur}
           />
           <InputGroup
             label={'Skills?'}
@@ -85,8 +118,10 @@ function App() {
             type={'text'}
             placeholder={'React, Node js, etc.'}
             value={inputValues.skills}
-            onChange={handleOnchange}
             errors={errors.skills}
+            onChange={handleOnchange}
+            onFoucus={handleOnFocus}
+            onBlur={handleBlur}
           />
 
           <input className='submitBtn' type="submit" value='Submit' />

@@ -92,7 +92,7 @@ button:hover {
 
 .inputError {
   margin: auto;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 300;
   animation: lights 2s linear infinite;
 
